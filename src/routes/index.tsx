@@ -29,6 +29,7 @@ const AppRoutes: React.FC = () => {
             height: 24,
           },
           labelStyle: {
+            fontFamily: 'Poppins-Medium',
             fontSize: 14,
             marginLeft: 15,
           },
