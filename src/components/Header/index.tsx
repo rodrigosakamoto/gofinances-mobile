@@ -13,7 +13,7 @@ const Header: React.FC<HeaderProps> = ({ size = 'large' }: HeaderProps) => {
     <Container size={size}>
       <LogoImage source={logoImg} />
 
-      <DateText>16 de abril</DateText>
+      <DateText>{new Date().toLocaleDateString()}</DateText>
     </Container>
   );
 };

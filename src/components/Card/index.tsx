@@ -1,28 +1,31 @@
 import React from 'react';
 
+import formatValue from '../../utils/formatValue';
+
 import {
   Container,
   CardTitle,
   CardTitleText,
   Icon,
   ValueText,
-  DateText,
+  // DateText,
 } from './styles';
 
 interface CardsProps {
   title: string;
   icon: string;
+  data: string;
 }
 
-const Card: React.FC<CardsProps> = ({ title, icon }: CardsProps) => {
+const Card: React.FC<CardsProps> = ({ title, icon, data }: CardsProps) => {
   return (
     <Container title={title}>
       <CardTitle>
         <CardTitleText title={title}>{title}</CardTitleText>
         <Icon name={icon} size={40} />
       </CardTitle>
-      <ValueText title={title}>R$ 17.400,00</ValueText>
-      {/* <DateText title={title}>Última entrada dia 13 de abril</DateText> */}
+      <ValueText title={title}>{formatValue(Number(data))}</ValueText>
+      {/* <DateText title={title}>{data}</DateText> */}
     </Container>
   );
 };

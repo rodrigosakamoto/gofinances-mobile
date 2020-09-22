@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Feather';
 
 import Dashboard from '../pages/Dashboard';
-import Transaction from '../pages/Transaction';
+import NewTransaction from '../pages/NewTransaction';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -54,7 +54,7 @@ const AppRoutes: React.FC = () => {
         />
         <Screen
           name="Transaction"
-          component={Transaction}
+          component={NewTransaction}
           options={{
             tabBarLabel: 'Cadastrar',
             tabBarIcon: ({ color, size, focused }) => {
