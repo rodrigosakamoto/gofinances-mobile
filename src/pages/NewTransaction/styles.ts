@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components/native';
 interface TransactionProps {
   type: string;
   selectedType: string;
+  error: boolean;
 }
 
 export const Container = styled.View`
@@ -30,22 +31,29 @@ export const TransactionTypeButton = styled.TouchableOpacity<TransactionProps>`
   height: 50px;
   flex: 1;
   flex-direction: row;
-  border: 1px solid #969cb2;
+  border: 2px solid #969cb2;
   border-radius: 5px;
   margin: 0 4px 16px 4px;
   justify-content: center;
   align-items: center;
   background: #f0f2f5;
 
-  ${({ type, selectedType }: TransactionProps) => {
+  ${({ type, selectedType, error }: TransactionProps) => {
     if (type === selectedType && type === 'income') {
       return css`
         background-color: rgba(18, 164, 84, 0.3);
+        border-color: rgba(18, 164, 84, 0.3);
       `;
     }
     if (type === selectedType && type === 'outcome') {
       return css`
         background-color: rgba(232, 63, 91, 0.3);
+        border-color: rgba(232, 63, 91, 0.3);
+      `;
+    }
+    if (selectedType === '' && error === true) {
+      return css`
+        border-color: #e83f5b;
       `;
     }
   }}
