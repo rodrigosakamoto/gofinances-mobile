@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import Header from '../../components/Header';
 import Card from '../../components/Card';
@@ -12,7 +12,7 @@ import {
   DashboardContainer,
   CardsContainer,
   ListTitle,
-  TransactionContainer,
+  TransactionList,
 } from './styles';
 
 export interface Transaction {
@@ -35,8 +35,9 @@ interface Balance {
 const Dashboard: React.FC = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [balance, setBalance] = useState<Balance>({} as Balance);
+  const [refresh, setRefresh] = useState(false);
 
-  useEffect(() => {
+  const loadData = useCallback(() => {
     api.get('transactions').then((response) => {
       const data = response.data.transactions.map(
         ({ id, title, value, type, category, created_at }: Transaction) => ({
@@ -48,10 +49,20 @@ const Dashboard: React.FC = () => {
           formattedDate: new Date(created_at).toLocaleDateString(),
         }),
       );
-      setTransactions(data);
+      setTransactions(data.reverse());
       setBalance(response.data.balance);
+      setRefresh(false);
     });
   }, []);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
+
+  const refreshList = useCallback(() => {
+    setRefresh(true);
+    loadData();
+  }, [loadData]);
 
   return (
     <Container>
@@ -69,10 +80,11 @@ const Dashboard: React.FC = () => {
       </DashboardContainer>
 
       <ListTitle>Listagem</ListTitle>
-      <TransactionContainer
+      <TransactionList
         data={transactions}
         keyExtractor={(item) => item.id}
-        showsVerticalScrollIndicator={true}
+        onRefresh={refreshList}
+        refreshing={refresh}
         renderItem={({ item }) => <Transaction data={item} />}
       />
     </Container>

@@ -3,8 +3,8 @@ import { FlatList } from 'react-native';
 import { Transaction } from './index';
 
 export const Container = styled.View`
-  flex: 1;
-  background: #e5e5e5;
+  min-height: 100%;
+  background: #f0f2f5;
 `;
 
 export const DashboardContainer = styled.View`
@@ -24,7 +24,7 @@ export const ListTitle = styled.Text`
   padding: 24px;
 `;
 
-export const TransactionContainer = styled(
+export const TransactionList = styled(
   FlatList as new () => FlatList<Transaction>,
 )`
   padding: 0 24px;

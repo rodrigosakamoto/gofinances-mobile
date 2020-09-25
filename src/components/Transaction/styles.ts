@@ -5,7 +5,6 @@ interface TransactionProps {
 }
 
 export const Container = styled.View`
-  flex: 1;
   height: 128px;
   background: #fff;
   border-radius: 5px;
