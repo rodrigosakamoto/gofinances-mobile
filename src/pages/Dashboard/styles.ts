@@ -3,7 +3,7 @@ import { FlatList } from 'react-native';
 import { Transaction } from './index';
 
 export const Container = styled.View`
-  min-height: 100%;
+  flex: 1;
   background: #f0f2f5;
 `;
 

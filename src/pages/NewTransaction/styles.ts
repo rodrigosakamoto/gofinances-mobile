@@ -6,6 +6,7 @@ interface TransactionProps {
 }
 
 export const Container = styled.View`
+  flex: 1;
   background: #f0f2f5;
 `;
 
@@ -18,15 +19,6 @@ export const Title = styled.Text`
   font-size: 20px;
   color: #000;
   margin-bottom: 24px;
-`;
-
-export const Input = styled.TextInput`
-  width: 100%;
-  height: 50px;
-  padding: 0 16px;
-  background: #fff;
-  border-radius: 5px;
-  margin-bottom: 16px;
 `;
 
 export const TransactionTypeContainer = styled.View`
