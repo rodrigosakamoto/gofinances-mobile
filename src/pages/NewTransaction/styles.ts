@@ -31,7 +31,7 @@ export const TransactionTypeButton = styled.TouchableOpacity<TransactionProps>`
   height: 50px;
   flex: 1;
   flex-direction: row;
-  border: 2px solid #969cb2;
+  border: 1px solid #969cb2;
   border-radius: 5px;
   margin: 0 4px 16px 4px;
   justify-content: center;
@@ -53,6 +53,7 @@ export const TransactionTypeButton = styled.TouchableOpacity<TransactionProps>`
     }
     if (selectedType === '' && error === true) {
       return css`
+        border-width: 2px;
         border-color: #e83f5b;
       `;
     }

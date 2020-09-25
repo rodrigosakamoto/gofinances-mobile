@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useRef } from 'react';
 import { Alert, TextInput, KeyboardAvoidingView, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+import { useNavigation } from '@react-navigation/native';
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
@@ -22,6 +23,8 @@ import {
 } from './styles';
 
 const NewTransaction: React.FC = () => {
+  const navigation = useNavigation();
+
   const formRef = useRef<FormHandles>(null);
   const valueInputRef = useRef<TextInput>(null);
 
@@ -33,7 +36,7 @@ const NewTransaction: React.FC = () => {
   }, []);
 
   const handleSubmit = useCallback(
-    async ({ title, value, category }) => {
+    async ({ title, value, category }, { reset }) => {
       try {
         formRef.current?.setErrors({});
         setTypeError(false);
@@ -62,6 +65,11 @@ const NewTransaction: React.FC = () => {
         await api.post('/transactions', data).then(() => {
           Alert.alert('Parabéns!', 'Transação cadastrada com sucesso.');
         });
+
+        reset();
+        setTypeSelected('');
+
+        navigation.goBack();
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -78,10 +86,8 @@ const NewTransaction: React.FC = () => {
         );
       }
     },
-    [typeSelected],
+    [typeSelected, navigation],
   );
-
-  console.log(typeError);
 
   return (
     <Container>
